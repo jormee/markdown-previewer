@@ -1,7 +1,19 @@
 body {
   background-color: gray;
-  
+  color: white;
+  padding: 10px;
 }
+
+h2 {
+  font-size: 1.3rem;
+  text-align: center;
+}
+
+#main {
+  display: flex;
+  flex-direction: column;
+}
+
 
 .container {
   display: flex;
@@ -42,4 +54,8 @@ body {
       flex-direction: column;
     }
   
+}
+
+.footer {
+  text-align: center;
 }

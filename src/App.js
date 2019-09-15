@@ -39,11 +39,16 @@ class App extends React.Component{
   }
   render() {
     return (
-      <div className = "container">
-        <Editor id = "md" markdown={this.state.markdown} 
-          onChange={this.inputChange} />
+      <div id="main">
+        <h2>Welcome to view</h2>
+        <p>This is a markdown preview app which allows you to input markdown texts in the editor (left panel) and get a live preview in the previewer (right panel)</p>
+        <div className = "container">
+          <Editor id = "md" markdown={this.state.markdown} 
+            onChange={this.inputChange} />
 
-        <Preview  id="human" markdown={this.state.markdown}/>
+          <Preview  id="human" markdown={this.state.markdown}/>
+        </div>
+        <p className = "footer">Created by Folajomi Shotunde &copy;2019</p>
       </div>
     )
   }

@@ -1,26 +1,67 @@
 import React from 'react';
-import logo from './logo.svg';
+import marked from 'marked';
+
+import placeholder from './placeholder';
+
 import './App.css';
 
-function App() {
+marked.setOptions({
+  breaks: true,
+});
+
+
+class App extends React.Component{
+  constructor(props) {
+    super(props);
+    this.state =  {
+      markdown: placeholder,
+      largeEditor: false,
+      largePreview: false
+    }
+    this.inputChange = this.inputChange.bind(this);
+    this.maximiseEditor = this.maximiseEditor.bind(this);
+    this.maximisePreview = this.maximisePreview.bind(this);
+  }
+  inputChange(e) {
+    this.setState({
+      markdown: e.target.value
+    });
+  }
+  maximiseEditor() {
+    this.setState({
+      largeEditor: !this.state.largeEditor
+    });
+  }
+  maximisePreview() {
+    this.setState({
+      largePreview: !this.state.largePreview
+    });
+  }
+  render() {
+    return (
+      <div className = "container">
+        <Editor id = "md" markdown={this.state.markdown} 
+          onChange={this.inputChange} />
+
+        <Preview  id="human" markdown={this.state.markdown}/>
+      </div>
+    )
+  }
+};
+
+const Editor = (props) => {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+    <textarea id="editor"
+      value={props.markdown}
+      onChange={props.onChange}
+      type="text"/>
+    )
+}
+
+const Preview = (props) => {
+  return (
+      <div id='preview' dangerouslySetInnerHTML={{__html: marked(props.markdown)}} />
+    )
 }
 
 export default App;
